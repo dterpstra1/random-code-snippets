@@ -1,0 +1,14 @@
+$servers = Import-Csv C:\Script\ServerNames.csv
+$creds = Get-Credential
+
+foreach($server in $servers){
+Write-host $server.ServerName
+Try
+{
+    Invoke-Command -ComputerName $server.ServerName -ScriptBlock{Add-LocalGroupMember -Group "Administrators" -Member "<USERNAME>"} -Credential $creds
+}
+Catch
+{
+    Out-File -FilePath C:\Script\FailedServer.csv -InputObject $server.ServerName -Append -Encoding utf8
+}
+} 
