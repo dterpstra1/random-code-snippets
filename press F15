@@ -1,0 +1,7 @@
+This emulates hitting shift+F15 every X seconds (59 by default here). This combo is used because most keyboards don’t even have that many function keys anymore, and not many commands map to that combo, meaning you won’t accidentally be doing anything.
+ 
+while (1) {
+  $wsh = New-Object -ComObject WScript.Shell 
+  $wsh.SendKeys('+{F15}')
+  Start-Sleep -seconds 59
+} 
